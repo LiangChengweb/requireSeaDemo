@@ -1,11 +1,4 @@
-/*
- require.config({
- baseUrl: 'js',
- paths: {
- "jquery" : "jquery."
- }
- })
- */
+
 require.config({
     paths: {
         "jquery": "lib/jquery"
@@ -17,7 +10,7 @@ require.config({
         }
     }
 });
-require(['jquery', 'math', 'green',"jquery.fn.add",], function ($, math, green) {
+require(['green','jquery', 'math','jquery.fn.add'], function (green,$,math) {
     $(function () {
         $('.box').add(1);
         green.toGreen();
