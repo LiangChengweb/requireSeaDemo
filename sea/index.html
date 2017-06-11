@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <title>require</title>
-    <script src="js/lib/require.js" data-main="js/main" defer async="true"></script>
+    <script src="js/lib/sea.js"></script>
+    <script>
+        //这里我瞎用的是绝对路径
+        seajs.use('/js/main.js',function(aa){
+            console.log(aa.msg)
+        });
+    </script>
 </head>
 <body>
 aaaaa<div class="box"></div>

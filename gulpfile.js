@@ -13,7 +13,7 @@ gulp.task('watch:req',function(){
 });
 
 gulp.task('sea',['watch:sea'],function(){
-    return gulp.src(app.reqPath)
+    return gulp.src(app.seaPath)
         .pipe($.webserver({
             livereload: true,
             open: true,
