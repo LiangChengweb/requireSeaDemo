@@ -12,8 +12,8 @@ gulp.task('watch:req',function(){
     gulp.watch(app.reqPath + '**/*.html');
 });
 
-gulp.task('sea',['watch:sea'],function(){
-    return gulp.src(app.seaPath)
+gulp.task('req',['watch:req'],function(){
+    return gulp.src(app.reqPath)
         .pipe($.webserver({
             livereload: true,
             open: true,
@@ -26,7 +26,7 @@ gulp.task('watch:sea',function(){
     gulp.watch(app.seaPath + '**/*.html');
 });
 
-gulp.task('req',['watch:sea'],function(){
+gulp.task('sea',['watch:sea'],function(){
     return gulp.src(app.seaPath)
         .pipe($.webserver({
             livereload: true,
@@ -34,3 +34,4 @@ gulp.task('req',['watch:sea'],function(){
             port: 2333
         }));
 });
+

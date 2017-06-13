@@ -1,19 +1,24 @@
 
 require.config({
     paths: {
-        "jquery": "lib/jquery"
+        "jquery": "lib/jquery",
+        'green': '/js/green',
+        'jquery.fn.add': '/js/jquery.fn.add',
+        'math': '/js/math'
     },
     shim: {
-        "add": {
-            exports: 'jquery.fn.add',
+        "jquery.fn.add": {
+            deps: ['jquery']
+        },
+        'green': {
             deps: ['jquery']
         }
     }
 });
-require(['green','jquery', 'math','jquery.fn.add'], function (green,$,math) {
+require(['jquery','math','green','jquery.fn.add'], function ($,math) {
+    console.log(1);
+    console.log(math.add(1, 1));
     $(function () {
         $('.box').add(1);
-        green.toGreen();
-        alert(math.add(1, 1));
-    })
-})
+    });
+});
