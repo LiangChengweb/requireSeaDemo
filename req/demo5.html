@@ -6,18 +6,24 @@
   require.config({
     paths: {
       "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"], 
-      'jquery.fill': './js/jquery.fill'
+      'jquery.fill': './js/jquery.fill',
+      'boxStyle': './js/boxStyle'
     },
     shim: {
       "jquery.fill": {
         exports: 'aa', // 对外调用名称,暂时不知道有什么用
         deps: ['jquery'] // 依赖模块
+      },
+      "boxStyle": {
+        exports: 'boxStyle',
+        deps: ['jquery']
       }
     }
   });
-  require(['jquery', 'jquery.fill'], function($) {
+  require(['jquery', 'boxStyle','jquery.fill'], function($,boxStyle) {
     $(function() {
       $('.box').fill(1);
+      boxStyle.red();
     })
   })
   </script>
