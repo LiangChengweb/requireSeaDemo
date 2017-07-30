@@ -1,4 +1,4 @@
-jQuery.fn.add = function(count) {
+;jQuery.fn.fill = function(count) {
     var $this = $(this);
     $this.html(count);
-}
+};

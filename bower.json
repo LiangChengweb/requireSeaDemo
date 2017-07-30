@@ -18,7 +18,7 @@
   ],
   "dependencies": {
     "requirejs": "^2.3.3",
-    "jquery": "jQuery#1.7.2",
+    "jquery": "jQuery#2.2.4",
     "seajs": "^3.0.0"
   },
   "devDependencies": {}

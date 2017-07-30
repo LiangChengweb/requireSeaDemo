@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>demo2 requirejs</title>
+</head>
+
+<body>
+  <div class="box"></div>
+  <p>
+    <button class="btn-toGreen">green</button>
+  </p>
+  <p>
+    <button class="btn-toRed">red</button>
+  </p>
+  <p>
+    <button class="addtext">add text</button>
+  </p>
+  <p>
+    <button class="removetext">removetext</button>
+  </p>
+  <script type="text/javascript" src="lib/require.js"></script>
+  <script type="text/javascript" defer async="true">
+  require.config({
+    paths: {
+      "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"], 
+      "boxStyle": "./js/boxStyle",
+      "boxText": "./js/boxText"
+    }
+  })
+  require(["jquery",'boxStyle','boxText'], function($,boxStyle,boxText) {
+    $(function() {
+      $('.box').css({
+        'width':'100px',
+        'height':'100px',
+        'background':'red',
+        'border-radius':'10px'
+      })
+      // 这个在jquery模块执行的代码，当然问题，但是有些方法在$(function(){})之外,用其他的模块的方法，或者其他模块根本就没用到jqeury。
+      $('.btn-toGreen').click(function(){
+        boxStyle.green();
+      });
+      $('.btn-toRed').click(function(){
+        boxStyle.red();
+      });
+    });
+    //模块依赖
+    var addtext = document.querySelector('.addtext');
+    var removetext = document.querySelector('.removetext');
+    addtext.onclick = function() {
+      boxText.addText();
+    }
+    removetext.onclick = function() {
+      boxText.removeText();
+    }
+  })
+  </script>
+</body>
+
+</html>

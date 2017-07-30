@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>demo2 requirejs</title>
+</head>
+
+<body>
+  <div class="box"></div>
+  <script type="text/javascript" src="lib/require.js"></script>
+  <script type="text/javascript" defer async="true">
+  require.config({
+    paths: {
+      // "jquery": "http://libs.baidu.com/jquery/2.0.3/jquery" || './lib/jquery',
+      //这种方法不推荐，requirejs自身提供了多路径，如下：
+      "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"],
+    }
+  })
+  require(["jquery"], function($) {
+    $(function() {
+      $('.box').css({
+        'width':'100px',
+        'height':'100px',
+        'background':'red',
+        'border-radius':'10px'
+      })
+    })
+  })
+  </script>
+</body>
+
+</html>

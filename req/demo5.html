@@ -1,0 +1,24 @@
+<body>
+  <div class="box"></div>
+  </p>
+  <script type="text/javascript" src="lib/require.js"></script>
+  <script type="text/javascript" defer async="true">
+  require.config({
+    paths: {
+      "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"], 
+      'jquery.fill': './js/jquery.fill'
+    },
+    shim: {
+      "jquery.fill": {
+        exports: 'aa', // 对外调用名称,暂时不知道有什么用
+        deps: ['jquery'] // 依赖模块
+      }
+    }
+  });
+  require(['jquery', 'jquery.fill'], function($) {
+    $(function() {
+      $('.box').fill(1);
+    })
+  })
+  </script>
+</body>

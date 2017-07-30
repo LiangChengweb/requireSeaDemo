@@ -1,0 +1,22 @@
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+  </p>
+  <script type="text/javascript" src="lib/require.js"></script>
+  <script type="text/javascript" defer async="true">
+  require.config({
+    paths: {
+      "math": "./js/math",
+      "totle": "./js/totle"
+    }
+  })
+  require(['totle'], function(totle) {
+    console.log(totle.output(document.querySelectorAll('li')));
+  })
+  </script>
+</body>
