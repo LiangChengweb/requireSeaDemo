@@ -1,5 +1,3 @@
-这些教程均不考虑ie
-
 [参考地址1](http://www.tuicool.com/articles/FveINvN)
 
 [参考地址2](http://www.imooc.com/video/8242)
