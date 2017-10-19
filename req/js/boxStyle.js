@@ -1,4 +1,4 @@
-define(function() {
+define(['jquery'],function() {
   var green = function() {
     $('.box').css({
       'background-color': 'green'

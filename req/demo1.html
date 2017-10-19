@@ -4,19 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <title>require</title>
+  <title>math 模块</title>
 </head>
 
 <body>
   <div class="box">box</div>
   <script type="text/javascript" src="lib/require.js"></script>
   <script type="text/javascript" defer async="true">
-  /*
-      require(['./js/math'], function(math) {
-        var box = document.querySelector('.box')
-        box.innerText = math.add(1, 1);
-      });
-      */
   require.config({
     paths: {
       'math': './js/math'

@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>demo2 requirejs</title>
+  <title>cdn 加载模块</title>
 </head>
 
 <body>
@@ -13,8 +13,6 @@
   <script type="text/javascript" defer async="true">
   require.config({
     paths: {
-      // "jquery": "http://libs.baidu.com/jquery/2.0.3/jquery" || './lib/jquery',
-      //这种方法不推荐，requirejs自身提供了多路径，如下：
       "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"],
     }
   })

@@ -35,7 +35,6 @@ define(function (){
 或者
 
 ```
-// 不推荐 
 <head>
   <script type="text/javascript" src="lib/require.js" ></script>
   <script type="text/javascript" defer async="true">
@@ -48,7 +47,7 @@ define(function (){
 ```
 > 二、 引入jquery
 
-由于jquery本身是没有通过`defined`，单独引入`jquery`，然后执行一些jquery的代码，显然会报错。（同样的道理，在seajs也是一样的）。
+由于jquery本身是没有通过`defined`，单独引入`jquery`，然后执行jquery语法代码，显然会报错。（同样的道理，在seajs也是一样的）。
 
 `requirejs`提供`require.config()`
 
@@ -59,7 +58,6 @@ define(function (){
   <script type="text/javascript" defer async="true">
   require.config({
     paths: {
-      // "jquery": "http://libs.baidu.com/jquery/2.0.3/jquery" || './lib/jquery' //这种方法不推荐，requirejs自身提供了多路径，如下：
       "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"],
     }
   })
@@ -85,12 +83,13 @@ define(function (){
   <div class="box">box</div>
   <script type="text/javascript" src="lib/require.js"></script>
   <script type="text/javascript" defer async="true">
-  /*
+  /* 第一种
   require(['./js/math'], function(math) {
     var box = document.querySelector('.box')
     box.innerText = math.add(1, 1);
   });
   */
+  // 第二种
   require.config({
     paths: {
       'math': './js/math'
@@ -104,7 +103,7 @@ define(function (){
 </body>
 ```
 > 三、模块依赖
-1. 创建`boxText`模块
+1. 创建`boxText`模块，可以直接依赖 jquery 模块。
 
 ```
 define(['jquery'],function() {
@@ -124,7 +123,7 @@ define(['jquery'],function() {
   }
 })
 ```
-2. 创建`boxStyle`模块
+2. 创建`boxStyle`模块，可在调用是在`require.config`中使用shim
 
 ```
 define(function() {
@@ -145,58 +144,18 @@ define(function() {
 })
 ```
 
-3. index.html
+index.html
 ```
-<body>
-  <div class="box"></div>
-  <p>
-    <button class="btn-toGreen">green</button>
-  </p>
-  <p>
-    <button class="btn-toRed">red</button>
-  </p>
-  <p>
-    <button class="addtext">add text</button>
-  </p>
-  <p>
-    <button class="removetext">removetext</button>
-  </p>
-  <script type="text/javascript" src="lib/require.js"></script>
-  <script type="text/javascript" defer async="true">
-  require.config({
-    paths: {
-      "jquery" : ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"], 
-      "boxStyle": "./js/boxStyle",
-      "boxText": "./js/boxText"
+require.config({
+  path: {
+    'boxStyle': 'file\path\boxStyle'
+  },
+  shim: {
+    "boxStyle": {
+      exports: 'boxStyle',
+      deps: ['jquery']
     }
-  })
-  require(["jquery",'boxStyle','boxText'], function($,boxStyle,boxText) {
-    $(function() {
-      $('.box').css({
-        'width':'100px',
-        'height':'100px',
-        'background':'red',
-        'border-radius':'10px'
-      })
-      // 这个在jquery模块执行的代码，当然问题，但是有些方法在$(function(){})之外,用其他的模块的方法，或者其他模块根本就没用到jqeury。
-      $('.btn-toGreen').click(function(){
-        boxStyle.green();
-      });
-      $('.btn-toRed').click(function(){
-        boxStyle.red();
-      });
-    });
-    //模块依赖
-    var addtext = document.querySelector('.addtext');
-    var removetext = document.querySelector('.removetext');
-    addtext.onclick = function() {
-      boxText.addText();
-    }
-    removetext.onclick = function() {
-      boxText.removeText();
-    }
-  })
-  </script>
-</body>
+  }
+})
 ```
-说明：`boxStyle`没有依赖而是嵌套在`$(function(){})`中，`boxText`是在`$(function(){})`嵌套的，而是之前在原生js中执行的
+模块之间的依赖如果是通过require，并没有通过require.config来定义，那只能通过require来依赖

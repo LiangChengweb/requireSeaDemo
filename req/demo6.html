@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>requeire 模块</title>
+</head>
+
+<body>
+  <div class="box"></div>
+  <ul>
+    <li>jquery 自身是不符合requirejs模块（虽然它源码是用requirejs开发的）,只能通过require.config来定义</li>
+    <li>模块之间的依赖如果是通过require，并没有通过require.config来定义，那只能通过require来依赖</li>
+  </ul>
+  </p>
+  <script type="text/javascript" src="lib/require.js"></script>
+  <script type="text/javascript" defer async="true">
+  require.config({
+    paths: {
+      "jquery": ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"],
+    },
+  });
+  require(['jquery','./js/attr/index'], function($, attr) {
+    $(function() { 
+      attr.remove();
+      attr.add();
+    })
+  })
+  </script>
+</body>
