@@ -5,7 +5,7 @@
 > 一、不依赖其他模块的module创建
 1. 创建math的module
 
-```
+```html
 // math.js
 define(function (){
     var add = function (x,y){
@@ -18,7 +18,7 @@ define(function (){
 ```
 2. 为了提高性能，将require引入的js全部写在`html`
 
-```
+```html
 <body>
   <div class="box">box</div>
   <script type="text/javascript" src="lib/require.js"></script>
@@ -32,7 +32,7 @@ define(function (){
 ```
 或者
 
-```
+```html
 <head>
   <script type="text/javascript" src="lib/require.js" ></script>
   <script type="text/javascript" defer async="true">
@@ -49,7 +49,7 @@ define(function (){
 
 `requirejs`提供`require.config()`
 
-```
+```html
 <body>
   <div class="box"></div>
   <script type="text/javascript" src="lib/require.js"></script>
@@ -76,7 +76,7 @@ define(function (){
 
 当然自己定义的模块，也可以通过这种方式调用了。如下：
 
-```
+```html
 <body>
   <div class="box">box</div>
   <script type="text/javascript" src="lib/require.js"></script>
@@ -103,7 +103,7 @@ define(function (){
 > 三、模块依赖
 1. 创建`boxText`模块，可以直接依赖 jquery 模块。
 
-```
+```html
 define(['jquery'],function() {
   var addText = function () {
     $('.box').text('box').css({
@@ -123,7 +123,7 @@ define(['jquery'],function() {
 ```
 2. 创建`boxStyle`模块，可在调用是在`require.config`中使用shim
 
-```
+```html
 define(function() {
   var green = function() {
     $('.box').css({
@@ -143,7 +143,8 @@ define(function() {
 ```
 
 index.html
-```
+
+```html
 require.config({
   path: {
     'boxStyle': 'file\path\boxStyle'
