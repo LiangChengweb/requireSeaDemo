@@ -1,10 +1,12 @@
 # Requirejs
 
+[TOC]
+
 [参考地址1](http://www.tuicool.com/articles/FveINvN)
 
 [参考地址2](http://www.imooc.com/video/8242)
 
-说明：以下代码全部是req目录下
+说明：以下代码全部是req目录下,seajs只是作为了解。
 
 ## 一、不依赖其他模块的module创建
 
@@ -194,7 +196,7 @@ define(['jquery'],function($) {
  </script>
 ```
 
-## 说明jquery本身是否没有通过`defined`，是否因为版本问题，我特地找了四个版本：
+## 四、说明jquery本身是否没有通过`defined`，是否因为版本问题，我特地找了四个版本：
 - 2.2.4
 - 3.3
 - 1.12
