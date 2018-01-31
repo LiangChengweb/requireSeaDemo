@@ -16,14 +16,18 @@
   </p>
   <script type="text/javascript" src="lib/require.js"></script>
   <script type="text/javascript">
-  require.config({
-    paths: {
-      "jquery": ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"],
-    },
+  requirejs([
+    // './jquery.1.9', //不能工作
+    // './jquery.1.12', //不能工作
+    // './jquery.3.3', //不能工作
+    'lib/jquery',
+    './js/test',
+    './js/main'
+  ], function($) {
+  	$(function(){
+    	$('body').css('background','#666');
+  	});
+    // console.log($);  	
   });
-  require(['./js/attr/index'], function(attr) {
-    attr.remove();
-    attr.add();
-  })
   </script>
 </body>

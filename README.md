@@ -1,11 +1,16 @@
+# Requirejs
+
 [参考地址1](http://www.tuicool.com/articles/FveINvN)
 
 [参考地址2](http://www.imooc.com/video/8242)
 
-> 一、不依赖其他模块的module创建
+说明：以下代码全部是req目录下
+
+## 一、不依赖其他模块的module创建
+
 1. 创建math的module
 
-```html
+```javascript
 // math.js
 define(function (){
     var add = function (x,y){
@@ -43,7 +48,7 @@ define(function (){
   </script>
 </head>
 ```
-> 二、 引入jquery
+## 二、 引入jquery
 
 由于jquery本身是没有通过`defined`，单独引入`jquery`，然后执行jquery语法代码，显然会报错。（同样的道理，在seajs也是一样的）。
 
@@ -72,7 +77,7 @@ define(function (){
   </script>
 </body>
 ```
-说明： 通常情况下现在加载CDN下jquery，如果没有才加载本地的jquery文件。
+说明： 通常情况下先加载CDN下jquery，如果没有才加载本地的jquery文件。
 
 当然自己定义的模块，也可以通过这种方式调用了。如下：
 
@@ -100,10 +105,11 @@ define(function (){
   </script>
 </body>
 ```
-> 三、模块依赖
+## 三、模块依赖
+
 1. 创建`boxText`模块，可以直接依赖 jquery 模块。
 
-```html
+```javascript
 define(['jquery'],function() {
   var addText = function () {
     $('.box').text('box').css({
@@ -121,9 +127,9 @@ define(['jquery'],function() {
   }
 })
 ```
-2. 创建`boxStyle`模块，可在调用是在`require.config`中使用shim
+2. 创建`boxStyle`模块，可在调用时在`require.config`中使用shim
 
-```html
+```javascript
 define(function() {
   var green = function() {
     $('.box').css({
@@ -144,7 +150,7 @@ define(function() {
 
 index.html
 
-```html
+```javascript
 require.config({
   path: {
     'boxStyle': 'file\path\boxStyle'
@@ -157,4 +163,52 @@ require.config({
   }
 })
 ```
-模块之间的依赖如果是通过require，并没有通过require.config来定义，那只能通过require来依赖
+3.  模块之间的依赖是通过`require()`，并没有经过`require.config`
+
+模块`./js/attr/index.js`
+
+```javascript
+define(['jquery'],function($) {
+  function add() {
+    console.log('addattr');
+    $('body').css('background','#ddd');
+  }
+  return add;
+})
+```
+
+./demo6.html
+
+```html
+ <script type="text/javascript" src="lib/require.js"></script>
+ <script type="text/javascript">
+ require.config({
+   paths: {
+     "jquery": ["http://libs.baidu.com/jquery/2.0.3/jquery", "./lib/jquery"],
+   },
+ });
+ require(['./js/attr/index'], function(attr) {
+   attr.remove();
+   attr.add();
+ })
+ </script>
+```
+
+## 说明jquery本身是否没有通过`defined`，是否因为版本问题，我特地找了四个版本：
+- 2.2.4
+- 3.3
+- 1.12
+- 1.9
+
+发现均不行，详细代码件./req/demo7.htmlj和./req/js/test.js。
+
+**阅读[requirejs文档](http://requirejs.org/docs/jquery.html#intro)，有这么一段**：
+
+So to reiterate, you will likely get an error if you refer to jQuery with another module name, like 'lib/jquery'. This example will not work:
+
+```javascript
+// THIS WILL NOT WORK
+define(['lib/jquery'], function ($) {...});
+```
+
+It will not work, since jQuery registers itself with the name of 'jquery' and not 'lib/jquery'. In general, explicitly naming modules in the define() call are discouraged, but [jQuery has some special constraints](https://github.com/requirejs/requirejs/wiki/Updating-existing-libraries#anon)

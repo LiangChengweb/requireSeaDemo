@@ -3,5 +3,5 @@ define(['jquery'],function($) {
     console.log('addattr');
     $('body').css('background','#ddd');
   }
-  return add;
-})
+  return add
+});
