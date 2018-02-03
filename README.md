@@ -1,6 +1,9 @@
 # Requirejs
 
-[TOC]
+启动服务器
+```bash
+gulp req
+```
 
 [参考地址1](http://www.tuicool.com/articles/FveINvN)
 
@@ -197,12 +200,36 @@ define(['jquery'],function($) {
 ```
 
 ## 四、说明jquery本身是否没有通过`defined`，是否因为版本问题，我特地找了四个版本：
+
 - 2.2.4
 - 3.3
 - 1.12
 - 1.9
+```javascript
+  requirejs([
+    // './jquery.1.9',
+    // './jquery.1.12',
+    // './jquery.3.3',
+    'lib/jquery',
+    './js/main',
+  ], function() {
+    $('body').css('background','#666');
+  });
+```
 
-发现均不行，详细代码件./req/demo7.htmlj和./req/js/test.js。
+发现均`requirejs`第二个参数回调函数不带参数可行，但这样子，导致某模块依赖jquery，同时还依赖其他模块，jquery必须提前，回调函数的参数顺序就被打乱报错，
+
+```javascript
+  requirejs([
+    'lib/jquery',
+    './js/test',
+  ], function(test) {
+    test();
+  });
+```
+
+所以还是建议，在`require.config`种定义jquery，详细代码件./req/demo7.htmlj和./req/js/test.js。
+
 
 **阅读[requirejs文档](http://requirejs.org/docs/jquery.html#intro)，有这么一段**：
 
