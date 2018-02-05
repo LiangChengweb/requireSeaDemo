@@ -55,7 +55,7 @@ define(function (){
 ```
 ## 二、 引入jquery
 
-由于jquery本身是没有通过`defined`，单独引入`jquery`，然后执行jquery语法代码，显然会报错。（同样的道理，在seajs也是一样的）。
+由于jquery本身对requirejs一些特殊约定，最好不直接通过`defined('./lib/jquery')`，单独引入`jquery`，这样做可能会报错，在下面[第四标题](https://github.com/LiangChengweb/requireSeaDemo#%E5%9B%9B%E8%AF%B4%E6%98%8Ejquery%E6%9C%AC%E8%BA%AB%E6%98%AF%E5%90%A6%E6%B2%A1%E6%9C%89%E9%80%9A%E8%BF%87defined%E6%98%AF%E5%90%A6%E5%9B%A0%E4%B8%BA%E7%89%88%E6%9C%AC%E9%97%AE%E9%A2%98%E6%88%91%E7%89%B9%E5%9C%B0%E6%89%BE%E4%BA%86%E5%9B%9B%E4%B8%AA%E7%89%88%E6%9C%AC)会进行描述。（在seajs也存在jquery引入问题，有时需要手动的给jquery加`defined`）。
 
 `requirejs`提供`require.config()`
 
